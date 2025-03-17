@@ -1,4 +1,5 @@
 import pandas as pd
+import wbdata
 import requests
 from fredapi import Fred
 import datetime as dt
@@ -62,3 +63,13 @@ for ticker_description in ticker_descriptions:
 
 # Display the last few rows of the data
 print(finance_data.tail(15))
+
+# Save the data in an efficient format
+output_path = "C:/Users/chdar/PycharmProjects/Finance/US_economic_data.parquet"
+finance_data.to_parquet(output_path, engine='pyarrow', compression='snappy')
+print(f"Data successfully saved to {output_path}")
+
+# Optional: Save as CSV if needed
+csv_output_path = "C:/Users/chdar/PycharmProjects/Finance/US_economic_data.csv"
+finance_data.to_csv(csv_output_path)
+print(f"CSV backup saved to {csv_output_path}")
